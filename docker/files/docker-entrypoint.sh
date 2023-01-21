@@ -19,6 +19,10 @@ if [[ ! -f $CONFIG/rconpw ]]; then
   pwgen 15 1 >"$CONFIG/rconpw"
 fi
 
+if [[ ! -f /factorio/console.log ]]; then
+  touch /factorio/console.log
+fi
+
 if [[ ! -f $CONFIG/server-settings.json ]]; then
   # Copy default settings if server-settings.json doesn't exist
   cp /opt/factorio/data/server-settings.example.json "$CONFIG/server-settings.json"
@@ -87,6 +91,7 @@ FLAGS=(\
   --server-adminlist "$CONFIG/server-adminlist.json" \
   --rcon-password "$(cat "$CONFIG/rconpw")" \
   --server-id /factorio/config/server-id.json \
+  --console-log /factorio/console.log \
 )
 
 if [ -n "$BIND" ]; then
